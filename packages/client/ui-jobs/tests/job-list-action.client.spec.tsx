@@ -81,7 +81,7 @@ describe('JobListAction visibility', () => {
     render(<JobListAction {...props([
       job({ status: 'completed', finishedAt: 1_700_000_003_000 }),
     ])} />)
-    expect(screen.getByRole('button', { name: '1 个后台任务' })).toBeDefined()
+    expect(screen.getByRole('button', { name: '1 个后台任务未运行' })).toBeDefined()
   })
 })
 
@@ -90,7 +90,7 @@ describe('JobListAction rows', () => {
     render(<JobListAction {...props([
       job({ id: 'subagent-1' as JobView['id'], kind: 'subagent', label: 'explore the repo', status: 'completed', finishedAt: 1_700_000_003_000 }),
     ])} />)
-    expect(screen.getByRole('button', { name: '1 个后台任务' })).toBeDefined()
+    expect(screen.getByRole('button', { name: '1 个后台任务未运行' })).toBeDefined()
     openList()
     expect(screen.getByText('explore the repo')).toBeDefined()
     expect(screen.queryByRole('button', { name: zh['row.expandAria'].replace('{label}', 'explore the repo') })).toBeNull()
@@ -371,7 +371,7 @@ describe('JobListAction observation', () => {
       outputJob({ id: 'bash-2' as JobView['id'], status: 'completed', finishedAt: 3 }),
     ]
     const { rerender } = render(<JobListAction {...props(settledPair)} />)
-    expect(screen.getByRole('button', { name: '2 个后台任务' })).toBeDefined()
+    expect(screen.getByRole('button', { name: '2 个后台任务未运行' })).toBeDefined()
     openList()
     const list = screen.getByRole('list', { name: zh['list.aria'] })
     fireEvent.keyDown(list, { key: 'a' })

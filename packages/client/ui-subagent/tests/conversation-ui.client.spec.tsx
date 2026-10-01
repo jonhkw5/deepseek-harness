@@ -222,7 +222,7 @@ describe('SubagentHeaderLineage', () => {
     view.rerender(<HeaderCatalog {...props(catalog(), {}, {
       ...summaries, [CHILD]: { ...summaries[CHILD]!, running: false },
     })} />)
-    const inactiveTrigger = screen.getByRole('button', { name: '2 个子智能体' })
+    const inactiveTrigger = screen.getByRole('button', { name: '共 2 个子智能体' })
     expect(inactiveTrigger.querySelector('[data-state="ongoing"]')).toBeNull()
   })
 
@@ -242,7 +242,7 @@ describe('SubagentHeaderLineage', () => {
       [forkChild]: { ...summary(forkChild, 1), parentId: fork, origin: 'subagent', running: true },
     })} />)
 
-    const trigger = screen.getByRole('button', { name: '1 个子智能体' })
+    const trigger = screen.getByRole('button', { name: '共 1 个子智能体' })
     expect(trigger.querySelector('[data-state="ongoing"]')).toBeNull()
   })
 
@@ -592,7 +592,7 @@ describe('SubagentHeaderLineage', () => {
     const input = props(catalog({ entries }), {}, summaries)
     render(<HeaderCatalog {...input} />)
     const trigger = screen.getByRole('button', { name: '1 个子智能体，正在运行' })
-    expect(within(trigger).getByText('9 个子智能体')).toBeTruthy()
+    expect(within(trigger).getByText('共 9 个子智能体')).toBeTruthy()
     hoverCatalog(trigger)
 
     const runningRow = screen.getByRole('treeitem', { name: /running.*4\.6K tok · 1分10秒/ })
@@ -645,7 +645,7 @@ describe('SubagentHeaderLineage', () => {
       },
     })
     render(<HeaderCatalog {...input} />)
-    hoverCatalog(screen.getByRole('button', { name: '1 个子智能体' }))
+    hoverCatalog(screen.getByRole('button', { name: '共 1 个子智能体' }))
     const beforeExpand = vi.getTimerCount()
     fireEvent.click(screen.getByRole('button', { name: '展开 worker 的下级子智能体' }))
     expect(screen.getByRole('treeitem', { name: /indexer.*5秒/ })).toBeTruthy()
