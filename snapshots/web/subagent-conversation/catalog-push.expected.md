@@ -1,1 +1,1 @@
-- button "2 subagents"
+- button "2 subagents total"

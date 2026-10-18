@@ -539,7 +539,7 @@ async function bootPreview(site: Site, manifest: ImageManifest, browser: Browser
     await preview.getByRole('heading', { name: 'Preview Workspace', exact: true }).waitFor({ state: 'visible' })
     expect(await preview.locator('[data-dockkit-tab-title]').allTextContents()).toEqual(['PREVIEW.md'])
 
-    const subagents = page.getByRole('button', { name: '2 subagents', exact: true })
+    const subagents = page.getByRole('button', { name: '2 subagents total', exact: true })
     await subagents.waitFor({ timeout: 15_000 })
     await subagents.hover()
     const catalog = page.getByRole('tree', { name: 'Subagent sessions' })

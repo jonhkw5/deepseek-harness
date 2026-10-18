@@ -119,8 +119,7 @@ describe.skipIf(MODE === 'record')('web e2e: background job list', () => {
     await expect.poll(() => stop.getAttribute('data-kill-state')).toBe('armed')
     await stop.click()
 
-    // Exact: the running trigger's name ('1 background job running') contains this label.
-    const idle = page.getByRole('button', { name: '1 background job', exact: true })
+    const idle = page.getByRole('button', { name: '1 background job not running', exact: true })
     await idle.waitFor({ timeout: 20_000 })
     // The unclaimed report's reason lands in the settled row's detail.
     await expect.poll(
@@ -137,7 +136,7 @@ describe.skipIf(MODE === 'record')('web e2e: background job list', () => {
 
   it('keeps the open list above the expanded right sidebar and in the header Tab order', async () => {
     onTestFailed(() => saveFailureShot(page, 'web-e2e-background-job-right-sidebar'))
-    const trigger = page.getByRole('button', { name: '1 background job', exact: true })
+    const trigger = page.getByRole('button', { name: '1 background job not running', exact: true })
     if (await trigger.getAttribute('aria-expanded') === 'true') await trigger.click()
     await page.getByRole('button', { name: 'Open right sidebar' }).click()
     const sidebar = page.locator('[data-rightbar-col]')

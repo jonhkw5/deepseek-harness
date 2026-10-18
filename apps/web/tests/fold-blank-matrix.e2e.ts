@@ -604,7 +604,7 @@ async function prepareWorld(browser: Browser, scenario: Case, scaffold: WebScaff
   await page.goto(scaffold.authenticatedUrl, { waitUntil: 'load' })
   await openSessionBySearch(page, parentFixture.markers.user(1))
   await choosePreferences(page, scenario)
-  const trigger = page.getByRole('button', { name: '1 subagent', exact: true })
+  const trigger = page.getByRole('button', { name: '1 subagent total', exact: true })
   await trigger.waitFor({ timeout: 15_000 })
   await trigger.hover()
   await page.getByRole('treeitem', { name: new RegExp(CHILD_LABEL) })
